@@ -1,0 +1,14 @@
+# @package _global_
+
+dims: 64
+
+data_module:
+  target_bound: [-2.0, 2.0]
+
+transport_net:
+  hidden_dim: 128
+  num_layers: 5
+
+dual_net:
+  hidden_dim: 128
+  num_layers: 4

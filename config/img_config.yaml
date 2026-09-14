@@ -1,0 +1,33 @@
+# Optimizer Parameters
+transport_learning_rate: 2e-4
+dual_learning_rate: 2e-4
+beta_one: 0.0
+beta_two: 0.9
+max_steps: 9400
+weight_decay: 0
+
+# Optimization Parameters
+jko_steps: 30
+epochs_per_jko_step: 8
+dual_steps_per_transport: 5
+
+alpha: 30.0
+crank_nicolson: True
+
+weight_initialization: "xavier"
+
+# Data Module Configuration
+data_module:
+  channel: 1
+  image_size: 32
+  batch_size: 64
+  samples: 60000
+  uniform_noise: False
+  gaussian_noise: False
+  center: True
+  logit: False
+  mean: 
+  deviation: 
+
+# Transport Network Configuration
+transport_net:

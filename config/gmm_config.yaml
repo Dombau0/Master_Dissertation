@@ -1,0 +1,93 @@
+# @package _global_
+
+defaults:
+  - _self_
+  - gmm_dimensions: gmm_dimensions_002.yaml
+
+# Changeable Parameters
+crank_nicolson: False
+device: "cpu"
+alpha: 2.0
+dims: 2
+seed: 0
+
+# Other Changeable Parameters
+output_directory: "out_gmm"
+verbose: True
+
+# Optimization Parameters
+jko_steps: 2
+epochs_per_jko_step: 1
+dual_steps: 3
+primal_steps: 2
+
+# Other Parameters
+smooth: False
+ratio: True
+
+# Optimizer Parameters
+transport_learning_rate: 1e-3
+dual_learning_rate: 1e-3
+weight_decay: 1e-7
+
+# Scheduler Parameters
+transport_step_size: 20
+transport_gamma: 0.4
+dual_step_size: 20
+dual_gamma: 0.4
+alpha_step_size: 20
+alpha_gamma: 1.0
+
+# Data Module Configuration
+data_module:
+  dims: ${dims}
+  gmm_comps: 10
+  helper_var: 4
+  initial_var: 16
+  target_bound: [-5.0, 5.0]
+  eig_val_range: [0.5, 1.0]
+  batch_size: 512
+  train_size: 512000
+
+# Transport Network Configuration
+transport_net:
+  input_dim: ${dims}
+  output_dim: ${dims}
+  hidden_dim: 8
+  num_layers: 4
+  activation: Prelu
+  final_activ: Prelu
+  full_activ: true
+  bias: true
+  dropout: 0.04
+  batch_norm: false
+  res: true
+  quad: false
+  sigmoid: false
+
+# Dual Network Configuration
+dual_net:
+  input_dim: ${dims}
+  output_dim: 1
+  hidden_dim: 8
+  num_layers: 3
+  activation: Prelu
+  final_activ: Prelu
+  full_activ: true
+  bias: true
+  dropout: 0.0
+  batch_norm: false
+  res: false
+  quad: false
+  sigmoid: false
+
+# Logger Configuration
+logger_module:
+  crank_nicolson: ${crank_nicolson}
+  evaluation_sample_size: 1000
+  num_projections: 100
+  log_every_x_kde_plot: 1
+  delete_networks: False
+  delete_data: True
+  verbose: ${verbose}
+  
